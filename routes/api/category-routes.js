@@ -6,6 +6,21 @@ const { Category, Product } = require('../../models');
 router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
+  
+// Change the anonymous callback function to become Asynchronous
+router.get('/', async (req, res) => {
+  // Store the bookData in a variable once the promise is resolved.
+  const bookData = await Book.findAll();
+
+  // Return the bookData promise inside of the JSON response
+  return res.json(bookData);
+});
+
+router.post('/', async (req, res) => {
+  const bookData = await Book.create(req.body);
+
+  return res.json(bookData);
+});
 });
 
 router.get('/:id', (req, res) => {
